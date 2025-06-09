@@ -1,0 +1,64 @@
+from string import punctuation
+
+i = 0
+nums = [str(i) for i in range(10)]
+yellows_str = input("Enter your yellow characters:")
+greys_str = input("Enter your grey characters:")
+yellows = list(yellows_str)
+greys = list(greys_str)
+
+file_name = "wordlebot/words.txt"
+def get_words(file_name) -> list[str]:
+    get_wrds = []
+    with open(file_name,'r') as file:
+        for line in file.read().lower().split('\n'):
+            if len(line) != 5:
+                continue
+            flag = False
+            for i in punctuation:
+                if i in line:
+                    flag = True
+                    break
+            for num in nums:
+                if num in line:
+                    flag = True
+                    break
+            if flag:
+                continue
+            get_wrds.append(line)
+    return get_wrds
+
+def guess_word(yellow:list,grey:list) -> list[str]: 
+    get_wrds:list = get_words(file_name) 
+    for i in range(len(get_wrds)):
+        line = get_wrds[i]
+        for c in grey:
+            if c in line:
+                get_wrds[i] = None
+        for c in yellow:
+            if c not in line:
+                get_wrds[i] = None
+        
+    new_wrds = [word for word in get_wrds if word is not None]
+    return new_wrds
+wrds = guess_word(yellows,greys)
+
+def filter(wrd_list) -> list:
+    new = []
+    char1 = input("Enter your green letter:")
+    idx1 = input("Enter the associated index:")
+    char2 = input("Enter your green letter:")
+    idx2 = input("Enter the associated index:")
+
+    for i in range(len(wrd_list)):
+        if i < len(wrd_list):
+            if char1 != '':
+                if wrd_list[i][int(idx1)] != char1:
+                    continue
+            if char2 != '':
+                if wrd_list[i][int(idx2)] != char2:
+                    continue
+        new.append(wrd_list[i])
+    return new
+
+print(filter(wrds))
