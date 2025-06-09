@@ -7,3 +7,4 @@
 # and then another green character (if you have another one)
 # you must also include the index at which that green character appears at (index starts at 0)
 # then a list of lowercase english words will be displayed in the terminal for you to choose from
+# Enjoy!
