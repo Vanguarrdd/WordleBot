@@ -7,7 +7,7 @@ greys_str = input("Enter your grey characters:")
 yellows = list(yellows_str)
 greys = list(greys_str)
 
-file_name = "wordlebot/words.txt"
+file_name = "words.txt"
 def get_words(file_name) -> list[str]:
     get_wrds = []
     with open(file_name,'r') as file:
